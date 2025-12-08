@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-action@stable
+        with:
+          toolchain: nightly
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+
+      - name: Install cargo-leptos
+        run: cargo install cargo-leptos
+
+      - name: Install Tailwind CLI
+        run: |
+          curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+          chmod +x tailwindcss-linux-x64
+          sudo mv tailwindcss-linux-x64 /usr/local/bin/tailwindcss
+
+      - name: Build release
+        run: cargo leptos build --release
+
+      - name: Create release archive
+        run: |
+          mkdir -p release
+          cp -r target/site release/
+          cp -r target/release/real-time-resume release/ 2>/dev/null || true
+          tar -czvf real-time-resume-${{ github.ref_name }}.tar.gz release/
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-time-resume-${{ github.ref_name }}
+          path: real-time-resume-${{ github.ref_name }}.tar.gz
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-time-resume-${{ github.ref_name }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: real-time-resume-${{ github.ref_name }}.tar.gz
+          generate_release_notes: true

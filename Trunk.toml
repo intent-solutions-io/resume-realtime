@@ -1,0 +1,17 @@
+[build]
+target = "templates/index.html"
+dist = "dist"
+
+[watch]
+watch = ["src", "styles", "templates"]
+ignore = ["target", "dist"]
+
+[serve]
+address = "127.0.0.1"
+port = 8080
+open = false
+
+[[hooks]]
+stage = "pre_build"
+command = "sh"
+command_arguments = ["-c", "tailwindcss -i styles/app.css -o dist/.stage/app.css --minify 2>/dev/null || tailwindcss -i styles/app.css -o dist/.stage/app.css"]

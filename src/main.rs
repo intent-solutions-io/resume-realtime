@@ -1,10 +1,10 @@
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
-    use axum::{routing::get, Router};
+    use axum::Router;
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
-    use real_time_resume::{shell, App};
+    use real_time_resume::App;
     use tower_http::services::ServeDir;
     use tracing_subscriber;
 
@@ -16,10 +16,7 @@ async fn main() {
     let routes = generate_route_list(App);
 
     let app = Router::new()
-        .leptos_routes(&leptos_options, routes, {
-            let leptos_options = leptos_options.clone();
-            move || shell(leptos_options.clone())
-        })
+        .leptos_routes(&leptos_options, routes, App)
         .fallback_service(ServeDir::new(&leptos_options.site_root))
         .with_state(leptos_options);
 

@@ -7,10 +7,10 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-leptos = { version = "0.6", features = ["csr", "ssr", "hydrate"] }
-leptos_axum = { version = "0.6", optional = true }
-leptos_meta = { version = "0.6", features = ["csr", "ssr", "hydrate"] }
-leptos_router = { version = "0.6", features = ["csr", "ssr", "hydrate"] }
+leptos = { version = "0.6.12" }
+leptos_axum = { version = "0.6.12", optional = true }
+leptos_meta = { version = "0.6.12" }
+leptos_router = { version = "0.6.12" }
 axum = { version = "0.7", optional = true }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"], optional = true }
 tower = { version = "0.4", optional = true }
@@ -24,7 +24,6 @@ console_error_panic_hook = "0.1"
 
 [features]
 default = []
-csr = ["leptos/csr", "leptos_meta/csr", "leptos_router/csr"]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
 ssr = [
     "dep:axum",

@@ -68,23 +68,3 @@ fn HomePage() -> impl IntoView {
         </div>
     }
 }
-
-/// Shell for SSR rendering
-#[cfg(feature = "ssr")]
-pub fn shell(options: LeptosOptions) -> impl IntoView {
-    view! {
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>
-                <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <AutoReload options=options.clone()/>
-                <HydrationScripts options/>
-                <link rel="stylesheet" href="/app.css"/>
-            </head>
-            <body>
-                <App/>
-            </body>
-        </html>
-    }
-}

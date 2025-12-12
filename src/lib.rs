@@ -39,7 +39,7 @@ fn HomePage() -> impl IntoView {
             </h1>
 
             <p class="text-gray-400 text-sm">
-                "Intent Solutions IO"
+                "intent solutions io"
             </p>
 
             <div class="bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-700">

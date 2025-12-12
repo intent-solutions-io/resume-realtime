@@ -1,10 +1,83 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
 **real-time-resume** is a real-time collaborative resume builder built with Rust, Leptos SSR + hydration, Axum, and Tailwind CSS.
+
+## Prerequisites
+
+```bash
+cargo install cargo-leptos trunk
+rustup target add wasm32-unknown-unknown
+```
+
+Project uses pinned toolchain: `nightly-2024-10-01` (see `rust-toolchain.toml`).
+
+## Build & Development Commands
+
+```bash
+# Development with hot reload (SSR mode)
+cargo leptos watch
+
+# Production build
+cargo leptos build --release
+
+# Run tests (requires ssr feature)
+cargo test --features ssr
+
+# Run a single test
+cargo test --features ssr test_name
+
+# Format and lint
+cargo fmt --check
+cargo clippy --all-targets --all-features -- -D warnings
+
+# Build WASM client only
+cargo build --target wasm32-unknown-unknown --features hydrate
+
+# Build server only
+cargo build --features ssr
+```
+
+Server runs at `http://127.0.0.1:3000` (reload port: 3001).
+
+## Architecture
+
+### Dual-Target Compilation
+
+This project compiles to **two different targets** from the same codebase:
+
+1. **Server binary** (`--features ssr`): Axum server with Leptos SSR, renders initial HTML
+2. **WASM client** (`--features hydrate`): Hydrates server-rendered HTML, handles interactivity
+
+The `cargo-leptos` tool orchestrates both builds automatically.
+
+### Feature Flags
+
+| Feature | Target | Purpose |
+|---------|--------|---------|
+| `ssr` | Native | Server-side rendering, Axum routes, tokio runtime |
+| `hydrate` | WASM | Client-side hydration, browser APIs |
+
+These features are **mutually exclusive** - never enable both simultaneously.
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/lib.rs` | Shared components + `hydrate()` entry for WASM |
+| `src/main.rs` | Dual main: Axum server (ssr) or hydrate call (wasm) |
+| `Cargo.toml [package.metadata.leptos]` | Leptos build configuration |
+
+### Request Flow
+
+```
+Browser Request → Axum (SSR) → HTML + WASM bundle
+                     ↓
+                 Leptos hydrates → Interactive SPA
+```
 
 ## Documentation Standards (MANDATORY)
 
@@ -29,7 +102,14 @@ Format: `NNN-CC-ABCD-short-description.md`
 - `DR` = Documentation Reference (standards, templates)
 - `AA` = After Action (AARs, retrospectives)
 - `PL` = Planning (blueprints, roadmaps)
+- `PP` = Product Planning (PRDs, roadmaps)
+- `PM` = Project Management (tasks, risks)
 - `TK` = Technical (architecture, API docs)
+- `AT` = Architecture (decisions, patterns)
+- `UC` = Use Cases (user stories, scenarios)
+- `TQ` = Test/Quality (test plans, QA)
+- `OD` = Operations/Delivery (releases, deployments)
+- `RL` = Research/Learning (blueprints, research)
 - `OP` = Operations (runbooks, procedures)
 
 **Document Types (ABCD):**
@@ -39,6 +119,14 @@ Format: `NNN-CC-ABCD-short-description.md`
 - `BPRT` = Blueprint
 - `ARCH` = Architecture
 - `RNBK` = Runbook
+- `PROD` = Product Requirements Document
+- `TASK` = Task List
+- `ADEC` = Architecture Decision
+- `RISK` = Risk Register
+- `USRS` = User Stories
+- `TEST` = Test Plan
+- `RLSE` = Release Plan
+- `RSRC` = Research/Resource
 
 ### New AAR Per Phase Rule
 
@@ -74,7 +162,7 @@ YYYY-MM-DD HH:MM CST (America/Chicago)
 Every AAR must end with exactly:
 ```
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io
 ```
 
@@ -96,25 +184,6 @@ Use conventional commits:
 docs(aar): phase N description
 ```
 
-## Development Commands
-
-```bash
-# Development
-cargo leptos watch
-
-# Production build
-cargo leptos build --release
-
-# Run tests
-cargo test
-
-# Format check
-cargo fmt --check
-
-# Lint
-cargo clippy -- -D warnings
-```
-
 ## Quick Reference
 
 | Rule | Enforcement |
@@ -132,5 +201,5 @@ cargo clippy -- -D warnings
 - Review `.gitignore` before committing
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

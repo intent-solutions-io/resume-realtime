@@ -193,5 +193,5 @@ When creating or renaming a document:
 *v4.2 enforces strict flat 000-docs (no subdirectories allowed).*
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

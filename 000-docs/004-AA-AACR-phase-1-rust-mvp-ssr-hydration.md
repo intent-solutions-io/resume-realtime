@@ -132,5 +132,5 @@ Request → Axum Router → Leptos SSR → HTML Response
 ```
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

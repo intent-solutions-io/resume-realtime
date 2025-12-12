@@ -154,5 +154,5 @@ enum Operation {
 - [tokio-tungstenite](https://github.com/snapview/tokio-tungstenite)
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

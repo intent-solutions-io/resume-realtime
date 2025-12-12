@@ -105,5 +105,5 @@ git revert [commit]
 [Any additional context, decisions made, or items for future reference]
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

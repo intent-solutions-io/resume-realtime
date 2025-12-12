@@ -1,4 +1,4 @@
-# Sovereign Recruiter Node - Full Blueprint Analysis (Late 2025)
+# Resume Realtime - Full Blueprint Analysis (Late 2025)
 
 **Document Type:** Technical Architecture / Strategy Blueprint
 **Created:** 2025-12-08
@@ -6,7 +6,7 @@
 
 ---
 
-## Updated Recommendations for Building the Sovereign Recruiter Node
+## Updated Recommendations for Building the Resume Realtime Platform
 
 Based on the complete blueprint in "Edge Computing Resumes .txt" (which details a disruptive browser extension for recruitment using edge compute, local LLMs, WASM, and a PLG model), here's an enhanced, practical guide to implementing it. This builds on our prior discussion, incorporating the full details from Parts III-VI: feature commoditization (e.g., Allsorter/Lusha killers), economic siege (reverse-SaaS pricing), regulatory moats (Zero-Trust), and the phased roadmap.
 
@@ -200,7 +200,7 @@ Follow your sequence for disciplined rollout—focus on PLG hooks like free pars
 
 ## Conclusion
 
-This stack (Rust WASM + TypeScript/React) matches your vision perfectly—empowering recruiters with sovereign, edge-based tools to dismantle the oligopoly. It's disruptive, scalable, and leverages 2025 tech trends like browser AI runtimes.
+This stack (Rust WASM + TypeScript/React) matches your vision perfectly—empowering recruiters with local, edge-based tools to dismantle the oligopoly. It's disruptive, scalable, and leverages 2025 tech trends like browser AI runtimes.
 
 ---
 

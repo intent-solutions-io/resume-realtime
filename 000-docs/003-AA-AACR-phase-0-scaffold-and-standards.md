@@ -133,5 +133,5 @@ rm -rf /home/jeremy/000-projects/resume/real-time-resume/
 5. Create Phase 1 AAR with verification evidence
 
 ---
-intent solutions io — confidential IP
+intent solutions io
 Contact: jeremy@intentsolutions.io

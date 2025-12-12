@@ -49,8 +49,8 @@ All documentation lives in `000-docs/` following Doc Filing System Standard v3.0
 
 ## License
 
-Proprietary - Intent Solutions IO
+MIT License - See [LICENSE](LICENSE) for details.
 
 ---
-intent solutions io — confidential IP
-Contact: jeremy@intentsolutions.io
+intent solutions io
+jeremy@intentsolutions.io
